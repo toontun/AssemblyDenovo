@@ -1,4 +1,5 @@
 import numpy
+import random
 
 class Read:
 	def __init__(self, seq="error"):
@@ -69,9 +70,15 @@ class Graph:
 		display+="\n"+str(self.listAdja)
 		display+="\n\n"+str(self.matrixAdja)
 		return(display)
-			
 
-#voir matrice d'adjacence ou liste pour le graph
+class Genome:
+	def __init__(self, size, alphabet):
+		self.genome_size=size
+		self.genome_alphabet=alphabet
+		self.sequence=""
+		for i in range(self.genome_size):
+			self.sequence+=random.choice(self.genome_alphabet)
+
 readOne= Read("CCCCCCCC")
 readTwo= Read("ATCGCTGA")
 readThree= Read("TTTCTATC")
@@ -85,8 +92,13 @@ EdgeTwo= Edge(NodeThree, NodeFour, 1)
 EdgeThree= Edge(NodeOne, NodeFour, 2)
 EdgeFour= Edge(NodeTwo, NodeThree, 3)
 Edges=[EdgeOne, EdgeTwo, EdgeThree, EdgeFour]
-g1 = Graph(Edges)
-print(g1)
+graph1 = Graph(Edges)
+print(graph1)
+
+gen1=Genome(10000, "ATCG")
+print(gen1.sequence)
+
+
 
 #ajouter l'alphabet
 #ajouter l'overlap longueur
@@ -95,5 +107,16 @@ print(g1)
 #link entre noeud et arrête pour savoir si la fourmi peut l'emprunter.
 #rajouter un +1 à un compteur, si le compteur est égale au nombre d'arrête alors on a un cycle d'euler.
 #si on fait un parcours qui ne fait pas toutes les arrêtes, on en fait un deuxième qui passe
-#par les arrêtes non utilisées et on essaie de concaténer les deux. 
-
+	#par les arrêtes non utilisées et on essaie de concaténer les deux. 
+#créer le génome aléatoirement et faire les read aléatoirement (on prend
+	#une position aléatoire + size_of_read == read)
+#du coup les read sont divisés en kmer de 20 pour l'instant
+#ensuite on prend tous les suffixes et préfixes et on regarde lesquels se complètent
+# on en fait une arrête si un suffixe et un préfixe se complètent bien. 
+#après on vérifie que ce graph est connexe. A la limite on peut vérifier
+#les in and out degree. 
+#si le graph est connexe on lance les algo de recherche du cycle de Euler
+#sinon je sais pas ce qu'il faut faire.
+#une fois qu'on a trouvé le cycle, l'afficher (voir module en python)
+#testé si le genome trouvé est ok en sachant qu'il est circulaire. 
+# on verra pour les extensions. 
