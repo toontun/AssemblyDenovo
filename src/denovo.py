@@ -73,11 +73,21 @@ class Graph:
 
 class Genome:
 	def __init__(self, size, alphabet):
+		self.reads=[]
 		self.genome_size=size
 		self.genome_alphabet=alphabet
 		self.sequence=""
 		for i in range(self.genome_size):
 			self.sequence+=random.choice(self.genome_alphabet)
+	
+	def createRandomRead(self, number_of_read, read_size):
+		for i in range(number_of_read):
+			pos_random = random.randint(0,self.genome_size)
+			if self.genome_size - pos_random > read_size:
+				self.reads.append(self.sequence[pos_random:pos_random+read_size])
+			else:
+				self.reads.append(self.sequence[pos_random:(self.genome_size-1)]+self.sequence[0:read_size-(self.genome_size-pos_random)])
+
 
 readOne= Read("CCCCCCCC")
 readTwo= Read("ATCGCTGA")
@@ -93,16 +103,15 @@ EdgeThree= Edge(NodeOne, NodeFour, 2)
 EdgeFour= Edge(NodeTwo, NodeThree, 3)
 Edges=[EdgeOne, EdgeTwo, EdgeThree, EdgeFour]
 graph1 = Graph(Edges)
-print(graph1)
 
 gen1=Genome(10000, "ATCG")
-print(gen1.sequence)
-
+gen1.createRandomRead(10, 10)
+print(gen1.reads)
 
 
 #ajouter l'alphabet
 #ajouter l'overlap longueur
-#ajouter le génome peut être
+#ajouter le génome
 #ajouter les k-mers des reads et leur longeurs
 #link entre noeud et arrête pour savoir si la fourmi peut l'emprunter.
 #rajouter un +1 à un compteur, si le compteur est égale au nombre d'arrête alors on a un cycle d'euler.
