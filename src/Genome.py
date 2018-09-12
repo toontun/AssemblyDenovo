@@ -1,13 +1,16 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+
+""" Module to manage Genome, 
+	Read and K-mers."""
+
 import random
-
-
-""" Module to manage Genome, Read and K-mers."""
-
 
 class Genome:
 	def __init__(self, size, alphabet):
 		self.reads=[]
+		self.kmers=[]
+		self.kmer_suffixe=[]
+		self.kmer_prefixe=[]
 		self.genome_size=size
 		self.genome_alphabet=alphabet
 		self.sequence=""
@@ -15,6 +18,7 @@ class Genome:
 			self.sequence+=random.choice(self.genome_alphabet)
 	
 	def createRandomRead(self, number_of_read, read_size):
+		self.reads=[]
 		pos_already_taken=[-1]
 		for i in range(number_of_read):
 			pos_random=-1
@@ -25,6 +29,21 @@ class Genome:
 				self.reads.append(self.sequence[pos_random:pos_random+read_size])
 			else:
 				self.reads.append(self.sequence[pos_random:]+self.sequence[:read_size-(self.genome_size-pos_random)])
+	
+	def create_kmers(self, kmer_size):
+		"""Function to create kmers with a specific size from each read"""
+		self.kmers=[]
+		for read in self.reads:
+			for i in range(len(read)-kmer_size):
+				self.kmers.append(read[i:i+20])
+	
+	def createSuffixePrefixe(self):
+		"""Function to get the prefixe and the suffixe from each kmer."""
+		self.kmer_suffixe=[]
+		self.kmer_prefixe=[]
+		for kmer in kmers:
+			self.kmer_prefixe.append(kmer[:-1])
+			self.kmer_suffixe.append(kmer[1:])
 
 	def __str__(self):
 		return(self.sequence)

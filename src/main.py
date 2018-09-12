@@ -1,4 +1,4 @@
-import Graph
+import Graph as grp
 import Genome as gen
 
 

@@ -1,13 +1,14 @@
- #!/usr/bin/env python
+ #!/usr/bin/env python3
+
+""" Module to manage Graph, 
+	Edge and Node."""
+
 import numpy
-
-
-""" Module to manage Graph, Edge and Node."""
 
 class Node:
 	_howMany = 0
 	def __init__(self, num, readValue):
-		"""Initialisation d'un noeud, num = int,
+		"""To initialize node, num = int,
 		readValue = oject(read)"""
 		Node._howMany+=1
 		self.num=num
@@ -19,7 +20,7 @@ class Node:
 
 class Edge:
 	def __init__(self, nodeOne, nodeTwo, num):
-		"""Initialisation d'une arrête, self.nodeOne=object(Node)
+		"""To initialize edge, self.nodeOne=object(Node)
 		self.nodeTwo==object(Node)"""
 		self.nodeOne=nodeOne
 		self.nodeTwo=nodeTwo
@@ -30,7 +31,8 @@ class Edge:
 
 class Graph: 
 	def __init__(self, Edges):
-		"""Initialisation d'un graph, Edges=list(object(Edge))"""
+		"""To initialize graph, 
+		Edges=list(object(Edge))"""
 		self.edges=Edges
 		self.matrixAdja=numpy.zeros((Node._howMany, Node._howMany))
 		self.listAdja={}
