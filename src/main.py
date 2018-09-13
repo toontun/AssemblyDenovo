@@ -2,11 +2,26 @@ import Graph as grp
 import Genome as gen
 
 
-gen1=gen.Genome(10000, "ATCG")
-gen1.createRandomRead(5000, 100)
+gen1=gen.Genome(100, "ATCG")
+gen1.createRandomRead(5, 10)
+gen1.createKmers(4)
+gen1.createSuffixePrefixe()
 
 
+i=0
+nodes=[]
+for value in gen1.kmers_sufpref:
+    nodes.append(grp.Node(i, value))
+    i+=1
 
+edges=[]
+k=0
+#ATTENTION ERREUR ICI, en effet, le if n'est pas bon puisqu'il ne vérifie pas l'overlap.
+for i in range(len(nodes)):
+    for j in range(len(nodes)):
+        if(nodes[i].value[:-1]+nodes[j].value[1:] in gen1.kmers):
+            edges.append(grp.Edge(nodes[i], nodes[j], k))
+            k+=1
 
 #ajouter l'overlap longueur
 #link entre noeud et arrête pour savoir si la fourmi peut l'emprunter.
@@ -24,4 +39,4 @@ gen1.createRandomRead(5000, 100)
 #sinon je sais pas ce qu'il faut faire.
 #une fois qu'on a trouvé le cycle, l'afficher (voir module en python)
 #testé si le genome trouvé est ok en sachant qu'il est circulaire. 
-# on verra pour les extensions. 
+# on verra pour les extensions.  

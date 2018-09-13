@@ -7,10 +7,11 @@ import random
 
 class Genome:
 	def __init__(self, size, alphabet):
+		"""To init a Genome with a random sequence, size = int, alphabet are the nucleotides needed like "ATCG" or
+		just "AC" so alphabet=string.""" 
 		self.reads=[]
 		self.kmers=[]
-		self.kmer_suffixe=[]
-		self.kmer_prefixe=[]
+		self.kmers_sufpref=[]
 		self.genome_size=size
 		self.genome_alphabet=alphabet
 		self.sequence=""
@@ -18,6 +19,7 @@ class Genome:
 			self.sequence+=random.choice(self.genome_alphabet)
 	
 	def createRandomRead(self, number_of_read, read_size):
+		"""To create Random Read from the Genome. Just give number of read wanted and their size. Both is int"""
 		if(read_size>self.genome_size):
 			print("read biger than genome")
 			return False
@@ -45,12 +47,15 @@ class Genome:
 				self.kmers.append(read[i:i+kmer_size])
 	
 	def createSuffixePrefixe(self):
-		"""Function to get the prefixe and the suffixe from each kmer."""
-		self.kmer_suffixe=[]
-		self.kmer_prefixe=[]
+		"""Function to get the prefixe and the suffixe from each kmer stocked into Genome.kmers_sufpref."""
+		self.kmers_sufpref=[]
 		for kmer in self.kmers:
-			self.kmer_prefixe.append(kmer[:-1])
-			self.kmer_suffixe.append(kmer[1:])
+			suffixe=kmer[1:]
+			prefixe=kmer[:-1]
+			if(suffixe not in self.kmers_sufpref):
+				self.kmers_sufpref.append(suffixe)
+			if(prefixe not in self.kmers_sufpref):
+				self.kmers_sufpref.append(prefixe)
 
 	def __str__(self):
 		return(self.sequence)
