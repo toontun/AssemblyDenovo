@@ -16,12 +16,12 @@ for value in gen1.kmers_sufpref:
 
 edges=[]
 k=0
-#ATTENTION ERREUR ICI, en effet, le if n'est pas bon puisqu'il ne vérifie pas l'overlap.
 for i in range(len(nodes)):
     for j in range(len(nodes)):
-        if(nodes[i].value[:-1]+nodes[j].value[1:] in gen1.kmers):
-            edges.append(grp.Edge(nodes[i], nodes[j], k))
-            k+=1
+        if(nodes[i].value[1:]==nodes[j].value[:-1]):
+            if(nodes[i].value[:-1]+nodes[j].value[1:] in gen1.kmers):
+                edges.append(grp.Edge(nodes[i], nodes[j], k))
+                k+=1
 
 #ajouter l'overlap longueur
 #link entre noeud et arrête pour savoir si la fourmi peut l'emprunter.
