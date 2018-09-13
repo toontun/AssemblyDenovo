@@ -53,7 +53,7 @@ class Graph:
 		"""Create an adjacency list"""
 		for edge in self.edges:
 			if edge.nodeOne.num not in self.listAdja:
-				self.listAdja[edge.nodeOne.num]=[]
+				self.listAdja[edge.nodeOne.num]=[edge.nodeTwo.num]
 			else:
 				self.listAdja[edge.nodeOne.num].append(edge.nodeTwo.num)			
 

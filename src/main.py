@@ -23,6 +23,7 @@ for i in range(len(nodes)):
                 edges.append(grp.Edge(nodes[i], nodes[j], k))
                 k+=1
 
+
 #ajouter l'overlap longueur
 #link entre noeud et arrête pour savoir si la fourmi peut l'emprunter.
 #rajouter un +1 à un compteur, si le compteur est égale au nombre d'arrête alors on a un cycle d'euler.
