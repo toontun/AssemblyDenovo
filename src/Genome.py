@@ -18,6 +18,9 @@ class Genome:
 			self.sequence+=random.choice(self.genome_alphabet)
 	
 	def createRandomRead(self, number_of_read, read_size):
+		if(read_size>self.genome_size):
+			print("read biger than genome")
+			return False
 		self.reads=[]
 		pos_already_taken=[-1]
 		for i in range(number_of_read):
@@ -29,19 +32,23 @@ class Genome:
 				self.reads.append(self.sequence[pos_random:pos_random+read_size])
 			else:
 				self.reads.append(self.sequence[pos_random:]+self.sequence[:read_size-(self.genome_size-pos_random)])
+				#the genome is circular. 
 	
-	def create_kmers(self, kmer_size):
+	def createKmers(self, kmer_size):
 		"""Function to create kmers with a specific size from each read"""
+		if(kmer_size>len(self.reads[0])):
+			print("size of kmers > size of reads")
+			return False
 		self.kmers=[]
 		for read in self.reads:
-			for i in range(len(read)-kmer_size):
-				self.kmers.append(read[i:i+20])
+			for i in range(len(read)-kmer_size+1):
+				self.kmers.append(read[i:i+kmer_size])
 	
 	def createSuffixePrefixe(self):
 		"""Function to get the prefixe and the suffixe from each kmer."""
 		self.kmer_suffixe=[]
 		self.kmer_prefixe=[]
-		for kmer in kmers:
+		for kmer in self.kmers:
 			self.kmer_prefixe.append(kmer[:-1])
 			self.kmer_suffixe.append(kmer[1:])
 
