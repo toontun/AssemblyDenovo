@@ -2,9 +2,9 @@ import Graph as grp
 import Genome as gen
 
 
-gen1=gen.Genome(100, "ATCG")
-gen1.createRandomRead(5, 10)
-gen1.createKmers(4)
+gen1=gen.Genome(10000, "ATCG")
+gen1.createRandomRead(5000, 100)
+gen1.createKmers(20)
 gen1.createSuffixePrefixe()
 
 
@@ -16,6 +16,7 @@ for value in gen1.kmers_sufpref:
 
 edges=[]
 k=0
+
 for i in range(len(nodes)):
     for j in range(len(nodes)):
         if(nodes[i].value[1:]==nodes[j].value[:-1]):
@@ -23,7 +24,10 @@ for i in range(len(nodes)):
                 edges.append(grp.Edge(nodes[i], nodes[j], k))
                 k+=1
 
+g1=grp.Graph(edges)
 
+# print(g1.listAdja)
+# print(g1.Node.howMany)
 #ajouter l'overlap longueur
 #link entre noeud et arrête pour savoir si la fourmi peut l'emprunter.
 #rajouter un +1 à un compteur, si le compteur est égale au nombre d'arrête alors on a un cycle d'euler.

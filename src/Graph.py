@@ -45,8 +45,6 @@ class Graph:
 		"""Create an adjacency matrix"""
 		for edge in self.edges:
 			self.matrixAdja[edge.nodeOne.num][edge.nodeTwo.num]=1
-		for i in range(Node._howMany):
-			self.matrixAdja[i][i]=1
 	
 	def __initListeAdja(self):
 		"""Create an adjacency list"""
