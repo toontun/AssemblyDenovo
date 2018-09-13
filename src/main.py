@@ -8,10 +8,7 @@ gen1.createRandomRead(5000, 100)
 
 
 
-#ajouter l'alphabet
 #ajouter l'overlap longueur
-#ajouter le génome
-#ajouter les k-mers des reads et leur longeurs
 #link entre noeud et arrête pour savoir si la fourmi peut l'emprunter.
 #rajouter un +1 à un compteur, si le compteur est égale au nombre d'arrête alors on a un cycle d'euler.
 #si on fait un parcours qui ne fait pas toutes les arrêtes, on en fait un deuxième qui passe
