@@ -28,7 +28,7 @@ class Edge:
 		self.value=nodeOne.value[:-1]+nodeTwo.value[1:]
 
 	def __str__(self):
-		return("Edge {} connect Node {} AND Node {}".format(self.num, str(self.nodeOne.num), str(self.nodeTwo.num)))
+		return("Edge {} connect Node {} TO Node {}".format(self.num, str(self.nodeOne.num), str(self.nodeTwo.num)))
 
 class Graph: 
 	def __init__(self, Edges):
@@ -50,15 +50,12 @@ class Graph:
 			self.matrixAdja[i][i]=1
 	
 	def __initListeAdja(self):
+		"""Create an adjacency list"""
 		for edge in self.edges:
 			if edge.nodeOne.num not in self.listAdja:
 				self.listAdja[edge.nodeOne.num]=[]
-			if edge.nodeOne.num in self.listAdja:
-				self.listAdja[edge.nodeOne.num].append(edge.nodeTwo.num)
-			if edge.nodeTwo.num not in self.listAdja:
-				self.listAdja[edge.nodeTwo.num]=[]
-			if edge.nodeTwo.num in self.listAdja:
-				self.listAdja[edge.nodeTwo.num].append(edge.nodeOne.num)				
+			else:
+				self.listAdja[edge.nodeOne.num].append(edge.nodeTwo.num)			
 
 	def __str__(self):
 		display="\n"
