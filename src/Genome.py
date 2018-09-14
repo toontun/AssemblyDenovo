@@ -11,7 +11,6 @@ class Genome:
 		just "AC" so alphabet=string.""" 
 		self.reads=[]
 		self.kmers=[]
-		self.kmers_sufpref=[]
 		self.genome_size=size
 		self.genome_alphabet=alphabet
 		self.sequence=""
@@ -34,7 +33,7 @@ class Genome:
 				self.reads.append(self.sequence[pos_random:pos_random+read_size])
 			else:
 				self.reads.append(self.sequence[pos_random:]+self.sequence[:read_size-(self.genome_size-pos_random)])
-				#the genome is circular. 
+				#the genome is circular.
 	
 	def createKmers(self, kmer_size):
 		"""Function to create kmers with a specific size from each read"""
@@ -45,17 +44,6 @@ class Genome:
 		for read in self.reads:
 			for i in range(len(read)-kmer_size+1):
 				self.kmers.append(read[i:i+kmer_size])
-	
-	def createSuffixePrefixe(self):
-		"""Function to get the prefixe and the suffixe from each kmer stocked into Genome.kmers_sufpref."""
-		self.kmers_sufpref=[]
-		for kmer in self.kmers:
-			suffixe=kmer[1:]
-			prefixe=kmer[:-1]
-			if(suffixe not in self.kmers_sufpref):
-				self.kmers_sufpref.append(suffixe)
-			if(prefixe not in self.kmers_sufpref):
-				self.kmers_sufpref.append(prefixe)
 
 	def __str__(self):
 		return(self.sequence)

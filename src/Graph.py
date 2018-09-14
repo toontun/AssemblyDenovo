@@ -28,50 +28,38 @@ class Edge:
 		self.value=nodeOne.value[:-1]+nodeTwo.value[1:]
 
 	def __str__(self):
-		return("Edge {} connect Node {} TO Node {}".format(self.num, str(self.nodeOne.num), str(self.nodeTwo.num)))
+		return("Edge {} connect Node {} TO Node {}".format(self.num, str(self.nodeOne.num), str(self.nodeTwo.num)))			
 
-# class Graph: 
-# 	def __init__(self, Edges):
-# 		"""To initialize graph, 
-# 		Edges=list(object(Edge))"""
-# 		self.edges=Edges
-# 		self.matrixAdja=numpy.zeros((Node._howMany, Node._howMany))
-# 		self.listAdja={}
-# 		if(len(Edges)!=0):
-# 			self.__initMatrix()
-# 			self.__initListeAdja()
-
-# 	def __initMatrix(self):
-# 		"""Create an adjacency matrix"""
-# 		for edge in self.edges:
-# 			self.matrixAdja[edge.nodeOne.num][edge.nodeTwo.num]=1
-	
-# 	def __initListeAdja(self):
-# 		"""Create an adjacency list"""
-# 		for edge in self.edges:
-# 			if edge.nodeOne.num not in self.listAdja:
-# 				self.listAdja[edge.nodeOne.num]=[edge.nodeTwo.num]
-# 			else:
-# 				self.listAdja[edge.nodeOne.num].append(edge.nodeTwo.num)			
-
-# 	def __str__(self):
-# 		display="\n"
-# 		for edge in self.edges:
-# 			display=display+str(edge)+"\n"
-# 		display+="\n"+str(self.listAdja)
-# 		display+="\n\n"+str(self.matrixAdja)
-# 		return(display)
 
 class Graph:
 
-	def __init__(self, listAdja={}):
+	def __init__(self, listAdja={}, GoInNode={}):
+		"""listAdja is a dictionary represent the adjacency list of the graph, 
+		which contains all nodes and their edges going out. 
+		GoInNode is the same but with the edge go in the node"""
 		self.listAdja=listAdja
+		self.GoInNode=GoInNode
 
 	def addNode(self, Node):
+		"""Add a node to the graph"""
 		if(Node not in self.listAdja):
 			self.listAdja[Node]=[]
-			return True
-		return False
+		
+		if(Node not in self.GoInNode):
+			self.GoInNode[Node]=[]
 
 	def addEdge(self, NodeOne, NodeTwo):
+		"""Create a edge from NodeOne to NodeTwo"""
 		self.listAdja[NodeOne].append(NodeTwo)
+		self.GoInNode[NodeTwo].append(NodeOne)
+
+	def isEulerian(self):
+		verify=len(self.listAdja)
+		k=0
+		for key in self.listAdja:
+			if(len(self.listAdja[key])==len(self.GoInNode[key])):
+				k+=1
+		
+		if(k==verify):
+			return True
+		return False
