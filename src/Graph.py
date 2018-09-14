@@ -30,34 +30,48 @@ class Edge:
 	def __str__(self):
 		return("Edge {} connect Node {} TO Node {}".format(self.num, str(self.nodeOne.num), str(self.nodeTwo.num)))
 
-class Graph: 
-	def __init__(self, Edges):
-		"""To initialize graph, 
-		Edges=list(object(Edge))"""
-		self.edges=Edges
-		self.matrixAdja=numpy.zeros((Node._howMany, Node._howMany))
-		self.listAdja={}
-		if(len(Edges)!=0):
-			self.__initMatrix()
-			self.__initListeAdja()
+# class Graph: 
+# 	def __init__(self, Edges):
+# 		"""To initialize graph, 
+# 		Edges=list(object(Edge))"""
+# 		self.edges=Edges
+# 		self.matrixAdja=numpy.zeros((Node._howMany, Node._howMany))
+# 		self.listAdja={}
+# 		if(len(Edges)!=0):
+# 			self.__initMatrix()
+# 			self.__initListeAdja()
 
-	def __initMatrix(self):
-		"""Create an adjacency matrix"""
-		for edge in self.edges:
-			self.matrixAdja[edge.nodeOne.num][edge.nodeTwo.num]=1
+# 	def __initMatrix(self):
+# 		"""Create an adjacency matrix"""
+# 		for edge in self.edges:
+# 			self.matrixAdja[edge.nodeOne.num][edge.nodeTwo.num]=1
 	
-	def __initListeAdja(self):
-		"""Create an adjacency list"""
-		for edge in self.edges:
-			if edge.nodeOne.num not in self.listAdja:
-				self.listAdja[edge.nodeOne.num]=[edge.nodeTwo.num]
-			else:
-				self.listAdja[edge.nodeOne.num].append(edge.nodeTwo.num)			
+# 	def __initListeAdja(self):
+# 		"""Create an adjacency list"""
+# 		for edge in self.edges:
+# 			if edge.nodeOne.num not in self.listAdja:
+# 				self.listAdja[edge.nodeOne.num]=[edge.nodeTwo.num]
+# 			else:
+# 				self.listAdja[edge.nodeOne.num].append(edge.nodeTwo.num)			
 
-	def __str__(self):
-		display="\n"
-		for edge in self.edges:
-			display=display+str(edge)+"\n"
-		display+="\n"+str(self.listAdja)
-		display+="\n\n"+str(self.matrixAdja)
-		return(display)
+# 	def __str__(self):
+# 		display="\n"
+# 		for edge in self.edges:
+# 			display=display+str(edge)+"\n"
+# 		display+="\n"+str(self.listAdja)
+# 		display+="\n\n"+str(self.matrixAdja)
+# 		return(display)
+
+class Graph:
+
+	def __init__(self, listAdja={}):
+		self.listAdja=listAdja
+
+	def addNode(self, Node):
+		if(Node not in self.listAdja):
+			self.listAdja[Node]=[]
+			return True
+		return False
+
+	def addEdge(self, NodeOne, NodeTwo):
+		self.listAdja[NodeOne].append(NodeTwo)
