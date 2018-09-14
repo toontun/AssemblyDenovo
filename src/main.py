@@ -24,17 +24,3 @@ print(g.isEulerian())
 end=time.time()
 t=end-start
 print(t)
-
-genome='GCCTGCAATA'
-
-
-reads=['AGCCTGCAAT', 'GCCTGCAATA', 'CCTGCAATAG', 'TGCAATAGCC', 'TAGCCTGCAA']
-
-kmers=['AGC', 'GCC', 'CCT', 'CTG', 'TGC', 'GCA', 'CAA', 'AAT', 'GCC', 'CCT', 'CTG', 'TGC', 'GCA', 'CAA',
-'AAT', 'ATA', 'CCT', 'CTG', 'TGC', 'GCA', 'CAA', 'AAT', 'ATA', 'TAG', 'TGC', 'GCA', 'CAA', 
-'AAT', 'ATA', 'TAG', 'AGC', 'GCC', 'TAG', 'AGC', 'GCC', 'CCT', 'CTG', 'TGC', 'GCA', 'CAA']
-
-listAdja={'GC': ['CC', 'CA', 'CC', 'CA', 'CA', 'CA', 'CC', 'CC', 'CA'], 'AG': ['GC', 'GC', 'GC'], 
-'CC': ['CT', 'CT', 'CT', 'CT'], 'CT': ['TG', 'TG', 'TG', 'TG'], 'TG': ['GC', 'GC', 'GC', 'GC', 'GC'], 
-'CA': ['AA', 'AA', 'AA', 'AA', 'AA'], 'AA': ['AT', 'AT', 'AT', 'AT'], 'AT': ['TA', 'TA', 'TA'], 
-'TA': ['AG', 'AG', 'AG']}

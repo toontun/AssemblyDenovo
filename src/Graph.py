@@ -52,12 +52,7 @@ class Graph:
 		self.GoInNode[NodeTwo].append(NodeOne)
 
 	def isEulerian(self):
-		verify=len(self.listAdja)
-		k=0
 		for key in self.listAdja:
-			if(len(self.listAdja[key])==len(self.GoInNode[key])):
-				k+=1
-		
-		if(k==verify):
-			return True
-		return False
+			if(len(self.listAdja[key])!=len(self.GoInNode[key])):
+				return False
+		return True
