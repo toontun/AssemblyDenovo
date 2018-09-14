@@ -3,8 +3,6 @@
 """ Module to manage Graph, 
 	Edge and Node."""
 
-import numpy
-
 class Node:
 	_howMany = 0
 	def __init__(self, num, value):
@@ -21,7 +19,7 @@ class Node:
 class Edge:
 	def __init__(self, nodeOne, nodeTwo, num):
 		"""To initialize edge, self.nodeOne=object(Node)
-		self.nodeTwo==object(Node)"""
+		self.nodeTwo==object(Node). An edge from nodeOne to nodeTwo."""
 		self.nodeOne=nodeOne
 		self.nodeTwo=nodeTwo
 		self.num=num
