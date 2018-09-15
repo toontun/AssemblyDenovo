@@ -20,7 +20,9 @@ for kmer in gen1.kmers:
     g.addNode(kmer[:-1])
     g.addEdge(kmer[:-1], kmer[1:])
 
-print(g.isEulerian())
+if(g.isEulerian()):
+	cycle=g.getEulerianCycle()
+
 end=time.time()
 t=end-start
 print(t)
