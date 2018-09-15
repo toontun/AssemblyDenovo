@@ -10,7 +10,7 @@ class Genome:
 		"""To init a Genome with a random sequence, size = int, alphabet are the nucleotides needed like "ATCG" or
 		just "AC" so alphabet=string.""" 
 		self.reads=[]
-		self.kmers=[]
+		self.kmers={}
 		self.genome_size=size
 		self.genome_alphabet=alphabet
 		self.sequence=""
@@ -22,28 +22,31 @@ class Genome:
 		if(read_size>self.genome_size):
 			print("read biger than genome")
 			return False
-		self.reads=[]
-		pos_already_taken=[-1]
+		self.reads=[""]*number_of_read
+		pos_already_taken=[-1]*number_of_read
+		pos_random=-1
 		for i in range(number_of_read):
-			pos_random=-1
 			while pos_random in pos_already_taken:
 				pos_random = random.randint(0,self.genome_size)
-			pos_already_taken.append(pos_random)
+			pos_already_taken[i]=pos_random
 			if self.genome_size - pos_random > read_size:
-				self.reads.append(self.sequence[pos_random:pos_random+read_size])
+				self.reads[i]=self.sequence[pos_random:pos_random+read_size]
 			else:
-				self.reads.append(self.sequence[pos_random:]+self.sequence[:read_size-(self.genome_size-pos_random)])
+				self.reads[i]=self.sequence[pos_random:]+self.sequence[:read_size-(self.genome_size-pos_random)]
 				#the genome is circular.
-	
+		
 	def createKmers(self, kmer_size):
 		"""Function to create kmers with a specific size from each read"""
 		if(kmer_size>len(self.reads[0])):
 			print("size of kmers > size of reads")
 			return False
-		self.kmers=[]
+		self.kmers={}
 		for read in self.reads:
 			for i in range(len(read)-kmer_size+1):
-				self.kmers.append(read[i:i+kmer_size])
+				if(read[i:i+kmer_size] not in self.kmers):
+					self.kmers[read[i:i+kmer_size]]=1
+				else:
+					self.kmers[read[i:i+kmer_size]]+=1
 
 	def __str__(self):
 		return(self.sequence)

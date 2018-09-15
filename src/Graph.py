@@ -1,32 +1,7 @@
  #!/usr/bin/env python3
 
 """ Module to manage Graph, 
-	Edge and Node."""
-
-class Node:
-	_howMany = 0
-	def __init__(self, num, value):
-		"""To initialize node, num = int,
-		readValue = oject(read)"""
-		Node._howMany+=1
-		self.num=num
-		self.value=value
-		self.used=False
-
-	def __str__(self):
-		return("Node: {} value: {} used: {}".format(self.num, str(self.value), self.used))
-
-class Edge:
-	def __init__(self, nodeOne, nodeTwo, num):
-		"""To initialize edge, self.nodeOne=object(Node)
-		self.nodeTwo==object(Node). An edge from nodeOne to nodeTwo."""
-		self.nodeOne=nodeOne
-		self.nodeTwo=nodeTwo
-		self.num=num
-		self.value=nodeOne.value[:-1]+nodeTwo.value[1:]
-
-	def __str__(self):
-		return("Edge {} connect Node {} TO Node {}".format(self.num, str(self.nodeOne.num), str(self.nodeTwo.num)))			
+	Edge and Node."""			
 
 
 class Graph:
@@ -52,6 +27,7 @@ class Graph:
 		self.GoInNode[NodeTwo].append(NodeOne)
 
 	def isEulerian(self):
+		"""Function to check if the graph is Eulerian"""
 		for key in self.listAdja:
 			if(len(self.listAdja[key])!=len(self.GoInNode[key])):
 				return False
