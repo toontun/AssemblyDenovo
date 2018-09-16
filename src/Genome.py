@@ -6,7 +6,7 @@
 import random
 
 class Genome:
-	def __init__(self, size, alphabet):
+	def __init__(self, size, alphabet, sequence=""):
 
 		"""To init a Genome with a random sequence, size = int, alphabet are the nucleotides needed like "ATCG" or
 		just "AC" so alphabet=string."""
@@ -15,9 +15,10 @@ class Genome:
 		self.kmers={}
 		self.genome_size=size
 		self.genome_alphabet=alphabet
-		self.sequence=""
-		for i in range(self.genome_size):
-			self.sequence+=random.choice(self.genome_alphabet)
+		self.sequence=sequence
+		if(sequence==""):
+			for i in range(self.genome_size):
+				self.sequence+=random.choice(self.genome_alphabet)
 	
 	def createRandomRead(self, number_of_read, read_size):
 
