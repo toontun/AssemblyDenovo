@@ -26,7 +26,10 @@ if(g.isEulerian()):
 	newseq=""
 	for node in cycle:
 		newseq+=node[0]
-	print("Sequence found, go to see in results")
+	if(gen1.isEqual(newseq)):
+		print("Sequence found, go to see in results")
+	else:
+		sys.exit("We didn't find a good sequence, please restart the program.")
 
 
 else:
