@@ -26,6 +26,7 @@ class Genome:
 		if(read_size>self.genome_size):
 			print("read biger than genome")
 			return False
+			
 		self.reads=[""]*number_of_read
 		pos_not_taken=list(range(self.genome_size))
 		for i in range(number_of_read):
