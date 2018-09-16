@@ -31,13 +31,15 @@ class Graph:
 
 	def isEulerian(self):
 		"""Function to check if the graph is Eulerian"""
+		if(not self.listAdja and not self.GoInNode): #means graph is empty
+			return False
 		for key in self.listAdja:
 			if(len(self.listAdja[key])!=len(self.GoInNode[key])):
 				return False
 		return True
 
 	def getEulerianCycle(self):
-		copy_list_adja=copy.deepcopy(self.listAdja) #we need copy it because each time an edge is used we will delete it in the adjacency list. 
+		copy_list_adja=copy.deepcopy(self.listAdja) #we need copy it because each time an edge is used we will delete it in the copy of the adjacency list. 
 		#we use deepcopy because our dictionary contains list. 
 		cycle=[""]*self._number_edge
 		starting_node=random.choice(tuple(copy_list_adja.keys()))
@@ -68,7 +70,7 @@ class Graph:
 						pos_in_cycle_bis=1
 						break
 
-				while(cycle):#normalement c'est tant qu'on est pas au new starting node
+				while(cycle):#if cycle is empty, we done the same path. 
 					for node in cycle:
 						if(node in copy_list_adja[current_node]):
 							next_node = node
