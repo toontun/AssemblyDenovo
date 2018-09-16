@@ -16,7 +16,7 @@ class Genome:
 		self.genome_size=size
 		self.genome_alphabet=alphabet
 		self.sequence=sequence
-		if(sequence==""):
+		if(not sequence):
 			for i in range(self.genome_size):
 				self.sequence+=random.choice(self.genome_alphabet)
 	
