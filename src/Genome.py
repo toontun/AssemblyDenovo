@@ -8,7 +8,7 @@ import random
 class Genome:
 	def __init__(self, size, alphabet, sequence=""):
 
-		"""To init a Genome with a random sequence, size = int, alphabet are the nucleotides needed like "ATCG" or
+		"""To init a Genome with a random sequence or given sequence, size = int, alphabet are the nucleotides needed like "ATCG" or
 		just "AC" so alphabet=string."""
 		
 		self.reads=[]

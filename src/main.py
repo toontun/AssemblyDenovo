@@ -1,7 +1,8 @@
  #!/usr/bin/env python3
 
-"""Program to find the original sequence from reads of a circulary Genome randomly created.
-	Launch the program into the repository "src" with the following command line:
+"""Program to find the original sequence from reads of a circulary Genome randomly created or 
+	given circulary genome from fasta file.Launch the program into the repository "src" with 
+	the following command line:	
 	python3 main.py genome_size 'availabled_nucleotides' number_of_read read_size kmer_size """
 
 import time
