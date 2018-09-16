@@ -12,8 +12,9 @@ import sys
 
 if __name__ == "__main__":
 
-	if(len(sys.argv)!=6):
-		sys.exit("command line: genome_size, 'availabled_nucleotides', number_of_read, read_size, kmer_size")
+	if(len(sys.argv) not in [4,6]):
+		sys.exit("COMMAND LINES:\n\npython3 main.py genome_size 'availabled_nucleotides' number_of_read read_size kmer_size"+"\n\n"+
+			"OR:\n\npython3 main.py fasta_file number_of_read read_size kmer_size\n")
 
 	def writeFastaFile(filename, sequence, comment):
 		"""little fonction to write a fasta file"""
