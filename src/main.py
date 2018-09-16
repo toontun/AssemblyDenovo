@@ -23,6 +23,8 @@ for kmer in gen1.kmers:
 if(g.isEulerian()):
 	cycle=g.getEulerianCycle()
 
+print(cycle)
+print(gen1.sequence)
 end=time.time()
 t=end-start
 print(t)

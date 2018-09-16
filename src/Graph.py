@@ -3,6 +3,7 @@
 """ Module to manage Graph, 
 	Edge and Node."""			
 import random
+import copy
 
 class Graph:
 
@@ -36,27 +37,29 @@ class Graph:
 		return True
 
 	def getEulerianCycle(self):
-		copy_list_adja=dict.copy(self.listAdja) #we need copy it because each time an edge is used we will delete it in the adjacency list. 
+		copy_list_adja=copy.deepcopy(self.listAdja) #we need copy it because each time an edge is used we will delete it in the adjacency list. 
+		#we use deepcopy because our dictionary contains list. 
 		cycle=[""]*self._number_edge
 		starting_node=random.choice(tuple(copy_list_adja.keys()))
-		current_node=starting_node
-		cycle[0]=current_node
+		current_node="tmp"
+		cycle[0]=starting_node
 		pos_in_cycle=1 #indicate where we are in "cycle". We start at 1 because 0 is the starting node. 
 		
 
 		while(pos_in_cycle!=self._number_edge):
 			
 			if(current_node!=starting_node):#because we can only get stuck at the starting_node. cf: https://www.youtube.com/watch?v=_x4IVlsw_q4&list=PLQ-85lQlPqFNGdaeGpV8dPEeSm3AChb6L&index=9
+				if(pos_in_cycle==1):
+					current_node=starting_node
 				next_node=random.choice(tuple(copy_list_adja[current_node]))
 				copy_list_adja[current_node].remove(next_node)
 				cycle[pos_in_cycle]=next_node
 				pos_in_cycle+=1
 				current_node=next_node
 			
-			else:#c'est ici que tu es bloqué pour l'instant
-				copy_list_adja=dict.copy(self.listAdja)
-				cycle_bis=[""]*self._number_edge
-				#il va falloir réinitialiser la copie. 
+			else:
+				copy_list_adja=copy.deepcopy(self.listAdja)
+				cycle_bis=[""]*self._number_edge 
 				for node in cycle:
 					if(copy_list_adja[node]):
 						starting_node=node
