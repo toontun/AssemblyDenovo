@@ -25,27 +25,27 @@ if __name__ == "__main__":
 					fasta.write("\n"+sequence[i])
 
 	start=time.time()
-	g=grp.Graph()
+	graph=grp.Graph()
 
 
-	gen1=gen.Genome(int(sys.argv[1]), sys.argv[2])
-	gen1.createRandomRead(int(sys.argv[3]), int(sys.argv[4]))
-	gen1.createKmers(int(sys.argv[5]))
+	random_genome=gen.Genome(int(sys.argv[1]), sys.argv[2])
+	random_genome.createRandomRead(int(sys.argv[3]), int(sys.argv[4]))
+	random_genome.createKmers(int(sys.argv[5]))
 
-	for kmer in gen1.kmers:
-		g.addNode(kmer[1:])
-		g.addNode(kmer[:-1])
-		g.addEdge(kmer[:-1], kmer[1:])
+	for kmer in random_genome.kmers:
+		graph.addNode(kmer[1:])
+		graph.addNode(kmer[:-1])
+		graph.addEdge(kmer[:-1], kmer[1:])
 
-	if(g.isEulerian()): 
+	if(graph.isEulerian()): 
 	#if the graph is not eulerian, graph is not strongly connected and not have a eulerian cycle. 
-		cycle=g.getEulerianCycle()
-		newseq=""
+		cycle=graph.getEulerianCycle()
+		new_seq=""
 		for node in cycle:
-			newseq+=node[0]
-		if(gen1.isEqual(newseq)):
-			writeFastaFile("../results/initial_sequence.fasta", gen1.sequence, "Initial Genome")
-			writeFastaFile("../results/sequence_from_cycle.fasta", newseq, "Sequence found with De Bruijn graph.")
+			new_seq+=node[0]
+		if(random_genome.isEqual(new_seq)):
+			writeFastaFile("../results/initial_sequence.fasta", random_genome.sequence, "Initial Genome")
+			writeFastaFile("../results/sequence_from_cycle.fasta", new_seq, "Sequence found with De Bruijn graph.")
 			print("Sequence found, go to see in results")
 		else:
 			sys.exit("We didn't find a good sequence, please restart the program.")

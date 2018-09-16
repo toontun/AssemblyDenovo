@@ -1,4 +1,4 @@
- #!/usr/bin/env python3
+#!/usr/bin/env python3
 
 """ Module to manage Graph, 
 	Edge and Node. This class is oriented for a De Bruijn graph."""			
@@ -8,42 +8,42 @@ import copy
 
 class Graph:
 
-	def __init__(self, listAdja={}, GoInNode={}):
+	def __init__(self, list_adja={}, go_in_node={}):
 
-		"""Init a graph: listAdja is a dictionary represent the adjacency list of the graph, 
+		"""Init a graph: list_adja is a dictionary represent the adjacency list of the graph, 
 		which contains all nodes and for each node, the connected node by a outgoing edge. 
-		GoInNode is the same but with incoming edge, each node contains a list of node connected by incoming edge."""
+		go_in_node is the same but with incoming edge, each node contains a list of node connected by incoming edge."""
 
-		self.listAdja=listAdja
-		self.GoInNode=GoInNode
+		self.list_adja=list_adja
+		self.go_in_node=go_in_node
 		self._number_edge=0
 
 	def addNode(self, Node):
 
 		"""Add a node to the graph if the node doesn't exist."""
 
-		if(Node not in self.listAdja):
-			self.listAdja[Node]=[]
+		if(Node not in self.list_adja):
+			self.list_adja[Node]=[]
 		
-		if(Node not in self.GoInNode):
-			self.GoInNode[Node]=[]
+		if(Node not in self.go_in_node):
+			self.go_in_node[Node]=[]
 
-	def addEdge(self, NodeOne, NodeTwo):
+	def addEdge(self, node_one, node_two):
 
-		"""Create a edge from NodeOne to NodeTwo"""
+		"""Create a edge from node_one to node_two"""
 
-		self.listAdja[NodeOne].append(NodeTwo)
+		self.list_adja[node_one].append(node_two)
 		self._number_edge+=1
-		self.GoInNode[NodeTwo].append(NodeOne)
+		self.go_in_node[node_two].append(node_one)
 
 	def isEulerian(self):
 
 		"""Function to check if the graph is Eulerian. Return true if graph is eulerian, if not return false."""
 
-		if(not self.listAdja and not self.GoInNode): #means graph is empty
+		if(not self.list_adja and not self.go_in_node): #means graph is empty
 			return False
-		for key in self.listAdja:
-			if(len(self.listAdja[key])!=len(self.GoInNode[key])):
+		for key in self.list_adja:
+			if(len(self.list_adja[key])!=len(self.go_in_node[key])):
 				return False
 		return True
 
@@ -51,7 +51,7 @@ class Graph:
 
 		"""Function to have an eulerian cycle of the graph. Return a list of vertices. Follow the vertices one by one to retrieve the cycle."""
 
-		copy_list_adja=copy.deepcopy(self.listAdja) #we need copy it because each time an edge is used we will delete it in the copy of the adjacency list. 
+		copy_list_adja=copy.deepcopy(self.list_adja) #we need copy it because each time an edge is used we will delete it in the copy of the adjacency list. 
 		#we use deepcopy because our dictionary contains list. 
 		cycle=[""]*self._number_edge
 		starting_node=random.choice(tuple(copy_list_adja.keys()))
@@ -81,7 +81,7 @@ class Graph:
 						pos_in_cycle_bis=1
 						break
 
-				copy_list_adja=copy.deepcopy(self.listAdja)#so we copy adjacency list one more time because we need to restart our old-course.
+				copy_list_adja=copy.deepcopy(self.list_adja)#so we copy adjacency list one more time because we need to restart our old-course.
 				while(cycle):#if cycle is empty, we run on the entire cycle. 
 					for node in cycle:
 						if(node in copy_list_adja[current_node]):
