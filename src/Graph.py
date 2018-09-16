@@ -1,7 +1,8 @@
  #!/usr/bin/env python3
 
 """ Module to manage Graph, 
-	Edge and Node."""			
+	Edge and Node. This class is oriented for a De Bruijn graph."""			
+
 import random
 import copy
 

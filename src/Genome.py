@@ -7,8 +7,10 @@ import random
 
 class Genome:
 	def __init__(self, size, alphabet):
+
 		"""To init a Genome with a random sequence, size = int, alphabet are the nucleotides needed like "ATCG" or
-		just "AC" so alphabet=string.""" 
+		just "AC" so alphabet=string."""
+		
 		self.reads=[]
 		self.kmers={}
 		self.genome_size=size
@@ -18,7 +20,9 @@ class Genome:
 			self.sequence+=random.choice(self.genome_alphabet)
 	
 	def createRandomRead(self, number_of_read, read_size):
-		"""To create Random Read from the Genome. Just give number of read wanted and their size. Both is int"""
+
+		"""To create Random Read from the Genome. Just give number of read wanted and their size. Both is int."""
+
 		if(read_size>self.genome_size):
 			print("read biger than genome")
 			return False
@@ -36,7 +40,9 @@ class Genome:
 				#the genome is circular.
 		
 	def createKmers(self, kmer_size):
+
 		"""Function to create kmers with a specific size from each read"""
+
 		if(kmer_size>len(self.reads[0])):
 			print("size of kmers > size of reads")
 			return False
@@ -49,7 +55,10 @@ class Genome:
 					self.kmers[read[i:i+kmer_size]]+=1
 	
 	def isEqual(self, other_sequence):
-		"""Function to test if the circulary genome is equal to another sequence, even if there are rotations.""" #https://www.geeksforgeeks.org/a-program-to-check-if-strings-are-rotations-of-each-other/
+
+		"""Function to test if the circulary genome is equal to another sequence, even if there are rotations.
+		Return true if genome are equal, if not return false.""" #function taken here: https://www.geeksforgeeks.org/a-program-to-check-if-strings-are-rotations-of-each-other/
+
 		temp=''
 		other_sequence_size=len(other_sequence)
 
