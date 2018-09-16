@@ -73,7 +73,7 @@ class Graph:
 			else:#here we come back at the starting node but somes edges are not used. So we restart the course at a node with outgoing edge.				
 				cycle_bis=[""]*self._number_edge 
 				for node in cycle:
-					if(copy_list_adja[node]):
+					if(copy_list_adja[node]):#check node with outgoing edge. 
 						starting_node=node
 						current_node=starting_node
 						cycle_bis[0]=starting_node
