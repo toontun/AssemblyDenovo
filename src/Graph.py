@@ -70,7 +70,7 @@ class Graph:
 						pos_in_cycle_bis=1
 						break
 
-				while(cycle):#if cycle is empty, we done the same path. 
+				while(cycle):#if cycle is empty, we run on the entire cycle. 
 					for node in cycle:
 						if(node in copy_list_adja[current_node]):
 							next_node = node

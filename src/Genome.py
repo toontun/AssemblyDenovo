@@ -47,6 +47,21 @@ class Genome:
 					self.kmers[read[i:i+kmer_size]]=1
 				else:
 					self.kmers[read[i:i+kmer_size]]+=1
+	
+	def isEqual(self, other_sequence):
+		"""Function to test if the circulary genome is equal to another sequence, even if there are rotations.""" #https://www.geeksforgeeks.org/a-program-to-check-if-strings-are-rotations-of-each-other/
+		temp=''
+		other_sequence_size=len(other_sequence)
+
+		if(self.genome_size!=other_sequence_size):
+			return False
+
+		temp = other_sequence + other_sequence
+
+		if(temp.count(self.sequence)>0):
+			return True
+		else:
+			return False
 
 	def __str__(self):
 		return(self.sequence)
