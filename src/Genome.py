@@ -27,12 +27,10 @@ class Genome:
 			print("read biger than genome")
 			return False
 		self.reads=[""]*number_of_read
-		pos_already_taken=[-1]*number_of_read
-		pos_random=-1
+		pos_not_taken=list(range(self.genome_size))
 		for i in range(number_of_read):
-			while pos_random in pos_already_taken:
-				pos_random = random.randint(0,self.genome_size)
-			pos_already_taken[i]=pos_random
+			pos_random=random.choice(pos_not_taken)
+			pos_not_taken.remove(pos_random)
 			if self.genome_size - pos_random > read_size:
 				self.reads[i]=self.sequence[pos_random:pos_random+read_size]
 			else:
