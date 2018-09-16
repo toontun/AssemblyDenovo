@@ -12,7 +12,8 @@ import sys
 
 if __name__ == "__main__":
 
-	if(len(sys.argv) not in [4,6]):
+	good_len_of_argv=[5,6]
+	if(len(sys.argv) not in good_len_of_argv):
 		sys.exit("COMMAND LINES:\n\npython3 main.py genome_size 'availabled_nucleotides' number_of_read read_size kmer_size"+"\n\n"+
 			"OR:\n\npython3 main.py fasta_file number_of_read read_size kmer_size\n")
 
@@ -29,12 +30,24 @@ if __name__ == "__main__":
 	start=time.time()
 	graph=grp.Graph()
 
+	if(len(sys.argv)==good_len_of_argv[1]):
+		genome=gen.Genome(int(sys.argv[1]), sys.argv[2])
+		genome.createRandomRead(int(sys.argv[3]), int(sys.argv[4]))
+		genome.createKmers(int(sys.argv[5]))
 
-	random_genome=gen.Genome(int(sys.argv[1]), sys.argv[2])
-	random_genome.createRandomRead(int(sys.argv[3]), int(sys.argv[4]))
-	random_genome.createKmers(int(sys.argv[5]))
+	if(len(sys.argv)==good_len_of_argv[0]):
+		seq_of_fasta=""
+		with open(sys.argv[1], "r") as f:
+			for line in f:
+				if(line[0]!=">"):
+					seq_of_fasta+=line[:-1]
 
-	for kmer in random_genome.kmers:
+		genome=gen.Genome(len(seq_of_fasta), "ATCG", seq_of_fasta)
+		genome.createRandomRead(int(sys.argv[2]), int(sys.argv[3]))
+		genome.createKmers(int(sys.argv[4]))
+
+
+	for kmer in genome.kmers:
 		graph.addNode(kmer[1:])
 		graph.addNode(kmer[:-1])
 		graph.addEdge(kmer[:-1], kmer[1:])
@@ -45,8 +58,8 @@ if __name__ == "__main__":
 		new_seq=""
 		for node in cycle:
 			new_seq+=node[0]
-		if(random_genome.isEqual(new_seq)):
-			writeFastaFile("../results/initial_sequence.fasta", random_genome.sequence, "Initial Genome")
+		if(genome.isEqual(new_seq)):
+			writeFastaFile("../results/initial_sequence.fasta", genome.sequence, "Initial Genome")
 			writeFastaFile("../results/sequence_from_cycle.fasta", new_seq, "Sequence found with De Bruijn graph.")
 			print("Sequence found, go to see in results")
 		else:
