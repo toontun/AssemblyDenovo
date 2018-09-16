@@ -15,6 +15,7 @@ if __name__ == "__main__":
 		sys.exit("command line: genome_size, 'availabled_nucleotides', number_of_read, read_size, kmer_size")
 
 	def writeFastaFile(filename, sequence, comment):
+		"""little fonction to write a fasta file"""
 		with open(filename, "w") as fasta:
 			fasta.write(">"+comment)
 			for i in range(len(sequence)):
@@ -36,7 +37,8 @@ if __name__ == "__main__":
 		g.addNode(kmer[:-1])
 		g.addEdge(kmer[:-1], kmer[1:])
 
-	if(g.isEulerian()):
+	if(g.isEulerian()): 
+	#if the graph is not eulerian, graph is not strongly connected and not have a eulerian cycle. 
 		cycle=g.getEulerianCycle()
 		newseq=""
 		for node in cycle:
