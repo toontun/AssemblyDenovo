@@ -4,23 +4,58 @@
 	given circulary genome from fasta file.Launch the program into the repository "src" with 
 	the following command line:	
 	python3 main.py genome_size 'availabled_nucleotides' number_of_read read_size kmer_size 
+	OR
+	python3 main.py fasta_file number_of_read read_size kmer_size
+
+	where:
+
+	genome_size is the wanted size for a random genome.
+
+	availablet_nucletides is the nucleotides will be use to construct the genome.
+
+	number_of_read is the number of reads.
+
+	read_size is the wanted size for each read.
+
+	kmer_size is the wanted size for each kmer.
+
+	fasta_file is the path to a fasta file contains a complete circulary genome.
+	
+	CLASSES:
+
+	This main use two classes, this classes need to be in the same directory that main.py:
+
+		Genome.py
+		Graph.py
+
+	OUTPUTS:
+
+		If this program find an eulerian cycle, it writes two fasta files in the repository 'results'.
+		One is the initial genome. The other is the sequence founded with this program. 
+		In the comment of the fasta file you have the used parameters. 
 
 	For more informations read this article: 
 	Compeau, P. E., Pevzner, P. A., & Tesler, G. (2011). How to apply de Bruijn graphs to genome assembly.
 	Nature biotechnology,29(11), 987.
 	"""
 
-import time
 import Graph as grp
 import Genome as gen
-import sys 
+import time
+import sys
 
 if __name__ == "__main__":
 
-	good_len_of_argv=[5,6]
+	good_len_of_argv=[2,5,6]
 	if(len(sys.argv) not in good_len_of_argv):
 		sys.exit("COMMAND LINES:\n\npython3 main.py genome_size 'availabled_nucleotides' number_of_read read_size kmer_size"+"\n\n"+
-			"OR:\n\npython3 main.py fasta_file number_of_read read_size kmer_size\n")
+			"OR:\n\npython3 main.py fasta_file number_of_read read_size kmer_size\n\nOR\n\npython3 main.py -help\n\n")
+
+	if(len(sys.argv)==2):
+		if(sys.argv[1]=="-help"):
+			import main
+			print(help(main))
+			sys.exit()
 
 	def writeFastaFile(filename, sequence, comment):
 		"""little fonction to write a fasta file"""
@@ -37,12 +72,12 @@ if __name__ == "__main__":
 
 	#the two statements "if" check if the user give a fasta file to construct the genome or if we need to construct it ramdomly.
 	
-	if(len(sys.argv)==good_len_of_argv[1]):#without fasta file
+	if(len(sys.argv)==good_len_of_argv[2]):#without fasta file
 		genome=gen.Genome(int(sys.argv[1]), sys.argv[2])
 		genome.createRandomRead(int(sys.argv[3]), int(sys.argv[4]))
 		genome.createKmers(int(sys.argv[5]))
 
-	if(len(sys.argv)==good_len_of_argv[0]):#with fasta file
+	if(len(sys.argv)==good_len_of_argv[1]):#with fasta file
 		seq_of_fasta=""
 		with open(sys.argv[1], "r") as f:
 			for line in f:
