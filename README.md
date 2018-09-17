@@ -1,8 +1,11 @@
 # Author
 
 Adam Bellaïche
+
 adam.bellaiche@gmail.com
+
 https://github.com/toontun
+
 University of Paris 7
 M2BI
 2018-2019
