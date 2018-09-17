@@ -3,7 +3,12 @@
 """Program to find the original sequence from reads of a circulary Genome randomly created or 
 	given circulary genome from fasta file.Launch the program into the repository "src" with 
 	the following command line:	
-	python3 main.py genome_size 'availabled_nucleotides' number_of_read read_size kmer_size """
+	python3 main.py genome_size 'availabled_nucleotides' number_of_read read_size kmer_size 
+
+	For more informations read this article: 
+	Compeau, P. E., Pevzner, P. A., & Tesler, G. (2011). How to apply de Bruijn graphs to genome assembly.
+	Nature biotechnology,29(11), 987.
+	"""
 
 import time
 import Graph as grp
@@ -30,12 +35,14 @@ if __name__ == "__main__":
 	start=time.time()
 	graph=grp.Graph()
 
-	if(len(sys.argv)==good_len_of_argv[1]):
+	#the two statements "if" check if the user give a fasta file to construct the genome or if we need to construct it ramdomly.
+	
+	if(len(sys.argv)==good_len_of_argv[1]):#without fasta file
 		genome=gen.Genome(int(sys.argv[1]), sys.argv[2])
 		genome.createRandomRead(int(sys.argv[3]), int(sys.argv[4]))
 		genome.createKmers(int(sys.argv[5]))
 
-	if(len(sys.argv)==good_len_of_argv[0]):
+	if(len(sys.argv)==good_len_of_argv[0]):#with fasta file
 		seq_of_fasta=""
 		with open(sys.argv[1], "r") as f:
 			for line in f:
@@ -47,7 +54,7 @@ if __name__ == "__main__":
 		genome.createKmers(int(sys.argv[4]))
 
 
-	for kmer in genome.kmers:
+	for kmer in genome.kmers: #Function addNode manage the duplicates. Function addEdge doesn't manage duplicates because in Genome.createKmers we can't have similars kmers.
 		graph.addNode(kmer[1:])
 		graph.addNode(kmer[:-1])
 		graph.addEdge(kmer[:-1], kmer[1:])
@@ -56,7 +63,7 @@ if __name__ == "__main__":
 	#if the graph is not eulerian, graph is not strongly connected and not have a eulerian cycle. 
 		cycle=graph.getEulerianCycle()
 		new_seq=""
-		for node in cycle:
+		for node in cycle: #here we follow the cycle and take the edge value. Because it's an eulerian cycle in a De Bruijn Graph. 
 			new_seq+=node[0]
 		if(genome.isEqual(new_seq)):
 			writeFastaFile("../results/initial_sequence.fasta", genome.sequence, "Initial Genome")

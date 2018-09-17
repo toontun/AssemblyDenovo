@@ -41,7 +41,7 @@ class Genome:
 		
 	def createKmers(self, kmer_size):
 
-		"""Function to create kmers with a specific size from each read"""
+		"""Function to create kmers with a specific size from each read. Accept a kmer only once. We can not have similar kmer."""
 
 		if(kmer_size>len(self.reads[0])):
 			print("size of kmers > size of reads")
