@@ -4,7 +4,7 @@ Adam Bellaïche
 
 adam.bellaiche@gmail.com
 
-https://github.com/toontun
+https://github.com/toontun/AssemblyDenovo
 
 University of Paris 7
 M2BI
