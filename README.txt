@@ -60,4 +60,10 @@ This program permit to assemble de novo a genome from reads.
 	* read_number = 50000
 	* read_size = 100
 	* kmer_size = 55
+
+# Documentation
+
+* with command line: see in "How to use it" with help function. 
+* go to AssemblyDenovo/doc/pythonDoc/Doxygen_doc/index.html
+* you have the rules for the project and the article in AssemblyDenovo/doc/projectInfo
 	
