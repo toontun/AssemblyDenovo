@@ -60,7 +60,9 @@ if __name__ == "__main__":
 			new_seq+=node[0]
 		if(genome.isEqual(new_seq)):
 			writeFastaFile("../results/initial_sequence.fasta", genome.sequence, "Initial Genome")
-			writeFastaFile("../results/sequence_from_cycle.fasta", new_seq, "Sequence found with De Bruijn graph.")
+			writeFastaFile(
+				"../results/sequence_from_cycle.fasta", new_seq, "Sequence found with De Bruijn graph. Parameters: genome_size: {}, number_of_read: {}, read_size: {}, number_of_kmer: {}, kmer_size: {}"
+				.format(len(new_seq),len(genome.reads), len(genome.reads[0]), len(genome.kmers), len(list(genome.kmers.keys())[0])))
 			print("Sequence found, go to see in results")
 		else:
 			sys.exit("We didn't find a good sequence, please restart the program.")
