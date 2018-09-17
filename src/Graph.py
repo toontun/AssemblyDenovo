@@ -20,7 +20,7 @@ class Graph:
 
 	def addNode(self, Node):
 
-		"""Add a node to the graph if the node doesn't exist."""
+		"""Add a node to the graph if the node doesn't exist. Node is the value of the node."""
 
 		if(Node not in self.list_adja):
 			self.list_adja[Node]=[]
@@ -49,7 +49,8 @@ class Graph:
 
 	def getEulerianCycle(self):
 
-		"""Function to have an eulerian cycle of the graph. Return a list of vertices. Follow the vertices one by one to retrieve the cycle."""
+		"""Function to have an eulerian cycle of the graph. Return a list of vertices. 
+		Follow the vertices one by one to retrieve the cycle."""
 
 		copy_list_adja=copy.deepcopy(self.list_adja) #we need copy it because each time an edge is used we will delete it in the copy of the adjacency list. 
 		#we use deepcopy because our dictionary contains list. 
@@ -96,3 +97,7 @@ class Graph:
 				cycle=list.copy(cycle_bis)
 
 		return cycle
+
+if __name__=="__main__":
+	import Graph
+	print(help(Graph))
