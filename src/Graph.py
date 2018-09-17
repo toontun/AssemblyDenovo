@@ -73,8 +73,8 @@ class Graph:
 			
 			else:#here we come back at the starting node but somes edges are not used. So we restart the course at a node with outgoing edge.				
 				cycle_bis=[""]*self._number_edge 
-				for node in cycle:
-					if(copy_list_adja[node]):#check node with outgoing edge. 
+				for i in range(len(cycle)):
+					if(copy_list_adja[cycle[i]]):#check node with outgoing edge. 
 						starting_node=node
 						current_node=starting_node
 						cycle_bis[0]=starting_node
@@ -83,13 +83,13 @@ class Graph:
 
 				copy_list_adja=copy.deepcopy(self.list_adja)#so we copy adjacency list one more time because we need to restart our old-course.
 				while(cycle):#if cycle is empty, we run on the entire cycle. 
-					for node in cycle:
-						if(node in copy_list_adja[current_node]):
-							next_node = node
+					for i in range(len(cycle)):
+						if(cycle[i] in copy_list_adja[current_node]):
+							next_node = cycle[i]
 							cycle_bis[pos_in_cycle_bis]=next_node
 							pos_in_cycle_bis+=1
-							copy_list_adja[current_node].remove(next_node)
-							cycle.remove(next_node)
+							copy_list_adja[current_node].pop(i)
+							cycle.pop(i)
 							current_node=next_node
 				
 				pos_in_cycle=pos_in_cycle_bis

@@ -63,7 +63,7 @@ if __name__ == "__main__":
 			writeFastaFile(
 				"../results/sequence_from_cycle.fasta", new_seq, "Sequence found with De Bruijn graph. Parameters: genome_size: {}, number_of_read: {}, read_size: {}, number_of_kmer: {}, kmer_size: {}"
 				.format(len(new_seq),len(genome.reads), len(genome.reads[0]), len(genome.kmers), len(list(genome.kmers.keys())[0])))
-			print("Sequence found, go to see in results")
+			print("\nSequence found, go to see in the repository 'results'.")
 		else:
 			sys.exit("We didn't find a good sequence, please restart the program.")
 
@@ -72,5 +72,5 @@ if __name__ == "__main__":
 		sys.exit("We didn't have an eulerian graph, please restart the program.")
 
 	end=time.time()
-	print(end-start)
+	print("\nTime to run the program: " + str(end-start) + " seconde(s).\n")
 
