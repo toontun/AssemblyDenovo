@@ -11,7 +11,7 @@
 
 	genome_size is the wanted size for a random genome.
 
-	availablet_nucletides is the nucleotides will be use to construct the genome.
+	availabled_nucletides is the nucleotides will be use to construct the genome.
 
 	number_of_read is the number of reads.
 

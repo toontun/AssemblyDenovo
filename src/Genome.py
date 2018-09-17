@@ -1,15 +1,21 @@
 #!/usr/bin/env python3
 
 """ Module to manage Genome, 
-	Read and K-mers."""
+	Read and K-mers.
+
+	Use it in main.py.
+	"""
 
 import random
 
 class Genome:
 	def __init__(self, size, alphabet, sequence=""):
 
-		"""To init a Genome with a random sequence or given sequence, size = int, alphabet are the nucleotides needed like "ATCG" or
-		just "AC" so alphabet=string."""
+		"""To init a Genome with a random sequence or given sequence, 
+			size = int, 
+			alphabet are the availabled nucleotides so alphabet=string,
+			sequence is a string.
+			"""
 		
 		self.reads=[]
 		self.kmers={}
@@ -41,7 +47,8 @@ class Genome:
 		
 	def createKmers(self, kmer_size):
 
-		"""Function to create kmers with a specific size from each read. Accept a kmer only once. We can not have similar kmer."""
+		"""Function to create kmers with a specific size from each read. Accept a kmer only once. We can not have similar kmer.
+		kmer_size is int."""
 
 		if(kmer_size>len(self.reads[0])):
 			print("size of kmers > size of reads")
@@ -57,7 +64,8 @@ class Genome:
 	def isEqual(self, other_sequence):
 
 		"""Function to test if the circulary genome is equal to another sequence, even if there are rotations.
-		Return true if genome are equal, if not return false.""" #function taken here: https://www.geeksforgeeks.org/a-program-to-check-if-strings-are-rotations-of-each-other/
+		Return true if genome are equal, if not return false.
+		other_sequence is a string.""" #function taken here: https://www.geeksforgeeks.org/a-program-to-check-if-strings-are-rotations-of-each-other/
 
 		temp=''
 		other_sequence_size=len(other_sequence)
@@ -74,3 +82,7 @@ class Genome:
 
 	def __str__(self):
 		return(self.sequence)
+
+if __name__=="__main__":
+	import Genome
+	print(help(Genome))
