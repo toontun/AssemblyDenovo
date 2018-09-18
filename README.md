@@ -66,3 +66,5 @@ This program permit to assemble de novo a genome from reads.
 * with command line: see in "How to use it" with help function. 
 * go to AssemblyDenovo/doc/pythonDoc/Doxygen_doc/index.html
 * you have the rules for the project and the article in AssemblyDenovo/doc/projectInfo
+* you have the report for the project in AssemblyDenovo/doc/RapportPC.pdf
+* you have a UML diagram in AssemblyDenovo/doc/UML.pdf
