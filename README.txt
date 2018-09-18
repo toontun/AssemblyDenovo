@@ -68,4 +68,5 @@ This program permit to assemble de novo a genome from reads.
 * you have the rules for the project and the article in AssemblyDenovo/doc/projectInfo
 * you have the report for the project in AssemblyDenovo/doc/RapportPC.pdf
 * you have a UML diagram in AssemblyDenovo/doc/UML.pdf
+* you have commands for tests in AssemblyDenovo/tests.txt
 	

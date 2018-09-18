@@ -1,0 +1,9 @@
+Possibles tests:
+
+python3 10000 "ATCG" 5000 100 20
+
+python3 100000 "ATCG" 50000 100 55
+
+python3 500000 "ATCG" 200000 100 55
+
+python3 ../data/mycoplasma.fna 200000 400 300
